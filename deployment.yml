@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: # {insert kind here}
+kind: Deployment
 metadata:
   labels:
     run: djangoserver
@@ -20,10 +20,15 @@ spec:
         run: djangoserver
     spec:
       containers:
-      - image: # {insert image here}
+      - image: us.icr.io/sn-labs-yeralytemirb/djangoserver:1
         imagePullPolicy: Always
         name: djangoserver
+        env:
+        - name: SONGS_URL
+          value: "https://yeralytemirb-8080.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
+        - name: PHOTO_URL
+          value: "https://getpic.2h3oa5v7tzm0.us-south.codeengine.appdomain.cloud"
         ports:
-        - containerPort: # {insert port here}
+        - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
